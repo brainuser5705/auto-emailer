@@ -1,0 +1,12 @@
+.idea
+gui
+venv
+*.iml
+credentials.json
+token.json
+*.csv
+__pycache__
+
+test.py
+quickstart.py
+idk.py
