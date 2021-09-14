@@ -1,3 +1,8 @@
+"""
+Code taken from quickstart page for using the Gmail API
+https://developers.google.com/gmail/api/quickstart/python
+"""
+
 import os
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request

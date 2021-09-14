@@ -7,6 +7,5 @@ token.json
 *.csv
 __pycache__
 
-test.py
-quickstart.py
-idk.py
+send_test.py
+email_lists/
