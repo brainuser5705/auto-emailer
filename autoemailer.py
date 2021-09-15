@@ -1,22 +1,42 @@
 from colorama import init
 from termcolor import colored, cprint
 from si_message import SiMessage
+
+# used this library function for intial input values
 from pyautogui import typewrite
 
+"""
+Sender email addresses and receiver email list file
+"""
 RIT_EMAIL = 'acl9213@g.rit.edu'
 DEV_EMAIL_LIST = 'email_lists/test_list.csv'
 RIT_EMAIL_LIST = 'email_lists/list.csv'
 
+# The colorama docs say "init() will filter ANSI escape
+# sequences out of any text sent to stdout or stderr,
+# and replace them with equivalent Win32 calls."
 init()
 
-QUERY_STARTER = colored("?", 'yellow')
+# Every input will be prefixed with a question mark
+QMARK = colored("?", 'yellow')
+
+"""
+Ask for user input
+@param query_str    the input query string
+@param init_value   initial input value, default is blank
+"""
 
 
 def get_input(query_str, init_value=''):
-    print(QUERY_STARTER, end=' ')
+    print(QMARK, end=' ')
     cprint(query_str, 'cyan', end='')
     typewrite(init_value)
     return input()
+
+
+"""
+Display the message content
+"""
 
 
 def print_message(message: SiMessage):
@@ -27,10 +47,17 @@ def print_message(message: SiMessage):
     print('==============================\n')
 
 
+"""
+Main function that runs the CLI
+"""
+
+
 def main():
     cprint(
         "\n WELCOME TO AUTO-EMAILER \n"
         "=========================\n")
+
+    # get the initial values
 
     week = ''
     while not week.isdigit():
@@ -43,8 +70,10 @@ def main():
     title = get_input('Title: ')
     description = get_input('Description: ')
 
+    # change values if needed
+
     message = None
-    need_change = 1
+    need_change = 1     # uses the trick that True is any non-zero value
     while need_change:
 
         message = SiMessage(week, letter, title, description)
@@ -64,19 +93,21 @@ def main():
             if need_change == 1:
                 week = get_input("New week: ")
             elif need_change == 2:
-                letter = get_input("New letter: ")
+                letter = get_input("New letter: ").upper()
             elif need_change == 3:
                 title = get_input("New title: ", title)
             elif need_change == 4:
                 description = get_input("New description: ", description)
 
+    # final confirmation
+
     print('\n')
-    if get_input("Are you sure this is good to send? (y) ") == 'y':
+    if get_input("Are you sure this is good to send? (y/n) ") == 'y':
         print('\n====== Sending Emails ======')
         message.api_send(RIT_EMAIL, DEV_EMAIL_LIST)
         print('==============================\n')
     else:
-        cprint("\nAUTO-EMAILER TERMINATED\nNO EMAILS SENT", 'red')
+        cprint("\nAUTO-EMAILER TERMINATED\n(NO EMAILS SENT)", 'red')
 
 
 if __name__ == '__main__':
