@@ -100,7 +100,7 @@ class SiMessage():
                 <link rel="stylesheet" href="html/style.css">
               </head>
               <body>
-               ''' + \
+            ''' + \
             SESSION_HTML.format(week=self.week, letter=self.letter, title=self.title, description=self.description,
                                 location=self.location, datetime=self.datetime) + \
             LOCATIONS_HTML + \

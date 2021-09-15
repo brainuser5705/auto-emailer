@@ -7,12 +7,14 @@ DEV_EMAIL = 'aliew9104@bths.edu'
 DEV_EMAIL_LIST = 'email_lists/test_list.csv'
 
 RIT_EMAIL = 'acl9213@g.rit.edu'
-RIT_EMAIL_LIST = 'enail_lists/list.csv'
+RIT_EMAIL_LIST = 'email_lists/list.csv'
 
 """
 Ask user for message variables and create the message
 @return SiMessage object
 """
+
+
 def create_message():
     week = input("Enter week: ")
 
@@ -29,6 +31,8 @@ def create_message():
 """
 Main method to send the message
 """
+
+
 def main():
     mail = create_message()
     mail.api_send(RIT_EMAIL, DEV_EMAIL_LIST)
