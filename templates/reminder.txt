@@ -1,0 +1,6 @@
+**Reminder**: SI SESSION IN 30 MINUTES!!!
+
+{title}
+{datetime}
+{location}
+{description}

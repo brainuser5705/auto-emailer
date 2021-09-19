@@ -35,7 +35,7 @@ Main method to send the message
 
 def main():
     mail = create_message()
-    mail.api_send(RIT_EMAIL, DEV_EMAIL_LIST)
+    mail.send(RIT_EMAIL, DEV_EMAIL_LIST)
 
 
 if __name__ == '__main__':

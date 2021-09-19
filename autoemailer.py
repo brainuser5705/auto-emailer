@@ -2,7 +2,7 @@ from colorama import init
 from termcolor import colored, cprint
 from si_message import SiMessage
 
-# used this library function for intial input values
+# used this library function for initial input values
 from pyautogui import typewrite
 
 """
@@ -42,7 +42,7 @@ Display the message content
 def print_message(message: SiMessage):
     print('\n======= Email Contents =======')
     print('SI Session ' + message.week + message.letter + ' - ' + message.title)
-    print(message.datetime + '\n' + message.location)
+    print(message.datetime.strftime('%B %d, %Y') + '\n' + message.location)
     print(message.description)
     print('==============================\n')
 
@@ -53,10 +53,6 @@ Main function that runs the CLI
 
 
 def main():
-    cprint(
-        "\n WELCOME TO AUTO-EMAILER \n"
-        "=========================\n")
-
     # get the initial values
 
     week = ''
@@ -73,10 +69,10 @@ def main():
     # change values if needed
 
     message = None
-    need_change = 1     # uses the trick that True is any non-zero value
+    need_change = 1  # uses the trick that True is any non-zero value
     while need_change:
 
-        message = SiMessage(week, letter, title, description)
+        message = SiMessage(week, letter, title, description, RIT_EMAIL, DEV_EMAIL_LIST)
         print_message(message)
 
         cprint("Do you need to change anything?\n"
@@ -104,11 +100,14 @@ def main():
     print('\n')
     if get_input("Are you sure this is good to send? (y/n) ") == 'y':
         print('\n====== Sending Emails ======')
-        message.api_send(RIT_EMAIL, DEV_EMAIL_LIST)
+        message.send()
         print('==============================\n')
     else:
         cprint("\nAUTO-EMAILER TERMINATED\n(NO EMAILS SENT)", 'red')
 
 
 if __name__ == '__main__':
+    cprint(
+        "\n WELCOME TO AUTO-EMAILER \n"
+        "=========================\n")
     main()

@@ -2,8 +2,8 @@
 gui
 venv
 *.iml
-credentials.json
-token.json
+creds/credentials.json
+creds/token.json
 *.csv
 __pycache__
 
